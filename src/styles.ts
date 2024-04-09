@@ -5,23 +5,22 @@ import styled, { createGlobalStyle } from 'styled-components'
 export const Colors = {
     background: '#EEF0F4',
     green: '#18a045',
-    lightBlue: '#B9E5FD',
+    gray: '#878787',
     lightGray: '#C5C5C5',
     cyan: '#88FDB6',
     darkCyan: '#65bc87',
-    yellow: '#e9ff1a',
-    gray: '#878787',
     white: '#fff',
     black: '#000',
-    blue: '#0CA4EB',
     red: '#FB2E54',
-
-    darkBlue: '#006da0',
+    lightBlue: '#82c2e5',
+    blue: '#0CA4EB',
+    darkBlue: '#007ada',
+    darkBlue2: '#005da5',
 }
 
 export const breakpoints = {
-    desktop: '1440px',
-    tablet: '1024px'
+    desktop: '1024px',
+    tablet: '768px'
 }
 
 export const Container = styled.div`
@@ -29,9 +28,13 @@ export const Container = styled.div`
     width: 80%;
     margin: 0 auto;
 
-    /* @media (min-width: ${breakpoints.tablet}) {
-        width: 95%;
-    } */
+    @media (min-width: ${breakpoints.desktop}) {
+        width: 100%;
+    }
+
+    @media (min-width: ${breakpoints.tablet}) {
+        width: 90%;
+    }
 `
 
 const GlobalStyle = createGlobalStyle`

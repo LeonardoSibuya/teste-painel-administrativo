@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Colors } from "../../styles";
+import { Colors, breakpoints } from "../../styles";
 
 export const SectionForm = styled.section`
     min-height: 60vh;
@@ -14,6 +14,14 @@ export const SectionForm = styled.section`
         font-size: 18px;
         text-align: center;
         text-shadow: 0px 1px 1px ${Colors.gray};
+    }
+
+    @media (min-width: ${breakpoints.desktop}) {
+        height: 70vh;
+
+        h3 {
+            font-size: 24px;
+        }
     }
 `
 
@@ -29,6 +37,12 @@ export const Form = styled.form`
         font-size: 12px;
         font-weight: bold;
         letter-spacing: 1px;
+    }
+
+    @media (min-width: ${breakpoints.desktop}) {
+        label {
+            font-size: 18px;
+        }
     }
 `
 
@@ -65,6 +79,16 @@ export const InputContainer = styled.div`
             transition: 0.3s ease;
         }
     }
+
+    @media (min-width: ${breakpoints.desktop}) {
+        align-items: center;
+
+        input {
+            font-size: 18px;
+            padding: 12px;
+            width: 60%;
+        }
+    }
 `
 
 export const SelectContainer = styled.div`
@@ -95,18 +119,46 @@ export const SelectContainer = styled.div`
             font-size: 16px;
         }
     }
+
+    @media (min-width: ${breakpoints.desktop}) {
+        align-items: center;
+
+        select {
+            width: 60%;
+            padding: 12px;
+            font-size: 18px;
+        }
+    }
 `
 
 export const ButtonForm = styled.button`
+    background-image: 
+    linear-gradient(185deg, 
+        ${Colors.lightBlue} 0,
+        ${Colors.blue} 25%, 
+        ${Colors.blue} 50%,
+        ${Colors.darkBlue} 75%,
+        ${Colors.darkBlue2} 100%);
     font-size: 14px;
     font-weight: bold;
     letter-spacing: 1px;
     color: ${Colors.white};
-    background-color: ${Colors.blue};
     border-radius: 16px;
     border: 1px solid ${Colors.blue};
     padding: 6px 8px;
     margin-top: 8px;
+    cursor: pointer;
+
+    &:active {
+        transform: scale(0.9);
+    }
+
+    @media (min-width: ${breakpoints.desktop}) {
+        font-size: 16px;
+        text-align: center;
+        width: 30%;
+        padding: 8px;
+    }
 `
 
 export const SubmitedContainer = styled.div`
@@ -127,5 +179,17 @@ export const SubmitedContainer = styled.div`
         font-size: 16px;
         font-weight: bold;
         color: ${Colors.green};
+    }
+
+    @media (min-width: ${breakpoints.desktop}) {
+        img {
+            width: 120px;
+            height: 120px;
+        }
+
+        p {
+            font-size: 20px;
+            text-align: center;
+        }
     }
 `

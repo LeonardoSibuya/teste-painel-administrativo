@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Colors } from "../../styles";
+import { Colors, breakpoints } from "../../styles";
 
 export const Section = styled.section`
     margin: 32px auto;
@@ -8,6 +8,10 @@ export const Section = styled.section`
         font-size: 18px;
         text-align: center;
         text-shadow: 0px 1px 1px ${Colors.gray};
+
+        @media (min-width: ${breakpoints.desktop}) {
+            font-size: 24px;
+        }
     }
 `
 
@@ -18,7 +22,7 @@ export const ListContainer = styled.div`
     padding: 16px 8px;
     border-radius: 16px;
     box-shadow: 0 0 6px ${Colors.gray};
-    height: 80vh;
+    height: 60vh;
 `
 
 export const InputContainer = styled.div`
@@ -34,6 +38,7 @@ export const InputContainer = styled.div`
             border: 2px solid ${Colors.black};
             padding: 4px 8px;
             text-align: center;
+            font-size: 12px;
             width: 40%;
             outline: none;
 
@@ -53,7 +58,6 @@ export const InputContainer = styled.div`
             align-items: center;
             justify-content: center;
             font-size: 12px;
-            font-weight: bold;
             cursor: pointer;
 
             img {
@@ -77,6 +81,26 @@ export const InputContainer = styled.div`
                 }
             }
         }
+
+        @media (min-width: ${breakpoints.desktop}) {
+            input {
+                font-size: 16px;
+                padding: 8px;
+            }
+
+            button {
+                font-size: 18px;
+
+                img {
+                    width: 22px;
+                    height: 22px;
+                }
+
+                &:active {
+                    transform: scale(0.9);
+                }
+            }
+        }
 `
 
 export const List = styled.ul`
@@ -87,7 +111,7 @@ export const List = styled.ul`
     gap: 16px;
     margin-top: 16px;
     padding: 16px;
-    max-height: 80%;
+    max-height: 70%;
     height: 100%;
     overflow-y: scroll;
 
@@ -113,12 +137,24 @@ export const List = styled.ul`
 
         h4 {
             font-size: 16px;
+            max-width: 100%;
         }
 
         span {
-            font-size: 14px;
+            font-size: 12px;
             color: ${Colors.gray};
             font-style: italic;
+            max-width: 100%;
+        }
+
+        @media (min-width: ${breakpoints.desktop}) {
+            h4 {
+                font-size: 18px;
+            }
+
+            span {
+                font-size: 16px;
+            }
         }
     }
 `
@@ -128,12 +164,23 @@ export const ButtonsContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 24px;
-    margin-top: 24px;
+    margin-top: 32px;
 
     button {
         background-color: transparent;
         border: none;
         font-size: 16px;
         font-weight: bold;
+        cursor: pointer;
+
+        @media (min-width: ${breakpoints.desktop}) {
+            font-size: 18px;
+            transition: 0.1s ease;
+
+            &:active {
+                transform: scale(0.9);
+                transition: 0.1s ease;
+            }
+        }
     }
 `
