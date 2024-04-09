@@ -34,6 +34,12 @@ export const InputContainer = styled.div`
             border: 2px solid ${Colors.black};
             padding: 4px 8px;
             text-align: center;
+            width: 40%;
+            outline: none;
+
+            &:focus {
+                border-color: ${Colors.blue};
+            }
         }
 
         button {
@@ -46,6 +52,9 @@ export const InputContainer = styled.div`
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
 
             img {
                 width: 16px;
@@ -59,6 +68,9 @@ export const InputContainer = styled.div`
             }
 
             &:active {
+                transform: scale(0.6);
+                transition: 0.1s ease;
+
                 img {
                     transform: scale(0.6);
                     transition: 0.1s ease;

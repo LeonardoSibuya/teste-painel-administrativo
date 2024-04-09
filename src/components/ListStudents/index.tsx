@@ -8,8 +8,9 @@ import { useEffect, useState } from 'react'
 
 const ListStudents = () => {
     const [students, setStudents] = useState<IStudents[]>([])
-    const [filteredStudents, setFilteredStudents] = useState([])
+    const [filteredStudents, setFilteredStudents] = useState<IStudents[]>([])
     const [filteredName, setFilteredName] = useState('')
+    const [isSubmited, setIsSubmited] = useState(false)
 
     const fetchStudents = async () => {
         try {
@@ -34,11 +35,13 @@ const ListStudents = () => {
             return name.toLowerCase().includes(filteredName.toLowerCase())
         })
 
-        setFilteredName(newFilteredStudents)
+        setIsSubmited(true)
+        setFilteredStudents(newFilteredStudents)
     }
 
     const handleClearFilter = () => {
         setFilteredName('');
+        setIsSubmited(false)
         setFilteredStudents([]);
     };
 
@@ -51,21 +54,22 @@ const ListStudents = () => {
 
                 <S.ListContainer>
                     <S.InputContainer>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             placeholder='filtrar pelo nome'
                             onChange={(e) => setFilteredName(e.target.value)}
-                            />
-                        <button>
+                            value={filteredName}
+                        />
+                        <button onClick={handleFilterStudents}>
                             <img src={lupa} alt="lupa" />
                         </button>
-                        <button>
-                            <img src={lupa} alt="icone de X" />
+                        <button onClick={handleClearFilter}>
+                            Limpar Filtro
                         </button>
                     </S.InputContainer>
 
                     <S.List>
-                        {students.map((student) => (
+                        {(isSubmited ? filteredStudents : students ).map((student) => (
                             <li key={student.email}>
                                 <h4>{student.name.first} {student.name.last}</h4>
                                 <span>{student.email}</span>
