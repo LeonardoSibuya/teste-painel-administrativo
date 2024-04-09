@@ -5,12 +5,15 @@ import { Container } from '../../styles'
 import lupa from '../../assets/images/lupa.png'
 import { IStudents } from '../../interfaces'
 import { useEffect, useState } from 'react'
+import Loading from '../Loading'
 
 const ListStudents = () => {
     const [students, setStudents] = useState<IStudents[]>([])
     const [filteredStudents, setFilteredStudents] = useState<IStudents[]>([])
-    const [filteredName, setFilteredName] = useState('')
+    const [isLoading, setIsLoading] = useState(true)
     const [isSubmited, setIsSubmited] = useState(false)
+    const [filteredName, setFilteredName] = useState('')
+    const [currentPage, setCurrentPage] = useState(1);
 
     const fetchStudents = async () => {
         try {
@@ -26,6 +29,10 @@ const ListStudents = () => {
 
     useEffect(() => {
         fetchStudents()
+
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 2000)
     }, [])
 
     const handleFilterStudents = () => {
@@ -35,6 +42,7 @@ const ListStudents = () => {
             return name.toLowerCase().includes(filteredName.toLowerCase())
         })
 
+        setCurrentPage(1)
         setIsSubmited(true)
         setFilteredStudents(newFilteredStudents)
     }
@@ -45,44 +53,80 @@ const ListStudents = () => {
         setFilteredStudents([]);
     };
 
+    // Paginação
+    const studentsPerPage = 10;
+    const indexOfLastStudent = currentPage * studentsPerPage;
+
+    // Definindo se array de estudantes será renderizado pelos nomes filtrados ou não 
+    const currentStudents = isSubmited ? filteredStudents : students;
+
+    const pagination = () => {
+        const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
+
+        // Definindo o array com a paginação
+        const currentStudentsToShow = currentStudents.slice(indexOfFirstStudent, indexOfLastStudent);
+
+        return currentStudentsToShow;
+    };
+
+    const currentStudentsPagination = pagination();
+
+    // Muda para a próxima página
+    const handleNextPage = () => {
+        setCurrentPage(prevPage => prevPage + 1);
+    };
+
+    // Muda para a página anterior
+    const handlePrevPage = () => {
+        setCurrentPage(prevPage => prevPage - 1);
+    };
+
     return (
         <Container>
             <S.Section>
-                <h2>
-                    Alunos cadastrados:
-                </h2>
+                {isLoading ? (
+                    <>
+                        <Loading />
+                    </>
+                ) : (
+                    <>
+                        <h2>
+                            Alunos cadastrados:
+                        </h2>
 
-                <S.ListContainer>
-                    <S.InputContainer>
-                        <input
-                            type="text"
-                            placeholder='filtrar pelo nome'
-                            onChange={(e) => setFilteredName(e.target.value)}
-                            value={filteredName}
-                        />
-                        <button onClick={handleFilterStudents}>
-                            <img src={lupa} alt="lupa" />
-                        </button>
-                        <button onClick={handleClearFilter}>
-                            Limpar Filtro
-                        </button>
-                    </S.InputContainer>
+                        <S.ListContainer>
+                            <S.InputContainer>
+                                <input
+                                    type="text"
+                                    placeholder='filtrar pelo nome'
+                                    onChange={(e) => setFilteredName(e.target.value)}
+                                    value={filteredName}
+                                />
+                                <button onClick={handleFilterStudents}>
+                                    <img src={lupa} alt="lupa" />
+                                </button>
+                                <button onClick={handleClearFilter}>
+                                    Limpar Filtro
+                                </button>
+                            </S.InputContainer>
 
-                    <S.List>
-                        {(isSubmited ? filteredStudents : students ).map((student) => (
-                            <li key={student.email}>
-                                <h4>{student.name.first} {student.name.last}</h4>
-                                <span>{student.email}</span>
-                                <span>{student.cell}</span>
-                            </li>
-                        ))}
-                    </S.List>
+                            <S.List>
+                                {currentStudentsPagination.map((student) => (
+                                    <li key={student.email}>
+                                        <h4>{student.name.first} {student.name.last}</h4>
+                                        <span>{student.email}</span>
+                                        <span>{student.cell}</span>
+                                    </li>
+                                ))}
+                            </S.List>
 
-                    <S.ButtonsContainer>
-                        <button>Anterior</button>
-                        <button>Próxima</button>
-                    </S.ButtonsContainer>
-                </S.ListContainer>
+                            <S.ButtonsContainer>
+                                <button onClick={handlePrevPage} disabled={currentPage === 1}>Anterior</button>
+                                <button onClick={handleNextPage} disabled={indexOfLastStudent >= currentStudents.length}>Próxima</button>
+                            </S.ButtonsContainer>
+                        </S.ListContainer>
+                    </>
+                )}
             </S.Section>
         </Container>
     )

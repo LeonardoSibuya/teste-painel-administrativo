@@ -81,7 +81,7 @@ const RegistrationForm = () => {
                                         type="button"
                                         onClick={() => setIsSubmited(false)}
                                     >
-                                        Cadatrar novo aluno
+                                        Cadastrar novo aluno
                                     </S.ButtonForm>
                                 </S.SubmitedContainer>
                             </ S.SectionForm>
@@ -114,7 +114,7 @@ const RegistrationForm = () => {
 
                             <S.InputContainer>
                                 <label htmlFor="email">
-                                    Email do aluno:
+                                    E-mail do aluno:
                                 </label>
                                 <input
                                     type="email"
