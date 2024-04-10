@@ -3,8 +3,12 @@ import * as S from './styles'
 import { Container } from '../../styles'
 
 import lupa from '../../assets/images/lupa.png'
+import person from '../../assets/images/person.png'
+import mail from '../../assets/images/mail.png'
+import phone from '../../assets/images/cellphone.png'
 
 import Loading from '../Loading'
+
 import useListStudents from './hooks/useListStudents'
 
 const ListStudents = () => {
@@ -55,9 +59,18 @@ const ListStudents = () => {
                             <S.List>
                                 {currentStudentsPagination.map((student) => (
                                     <li key={student.email}>
-                                        <h4>{student.name.first} {student.name.last}</h4>
-                                        <span>{student.email}</span>
-                                        <span>{student.cell}</span>
+                                        <h4>
+                                            <img src={person} alt="" />
+                                            {student.name.first} {student.name.last}
+                                        </h4>
+                                        <span>
+                                            <img src={mail} alt="" />
+                                            {student.email}
+                                        </span>
+                                        <span>
+                                            <img src={phone} alt="" />
+                                            {student.cell}
+                                        </span>
                                     </li>
                                 ))}
                             </S.List>

@@ -135,6 +135,13 @@ export const List = styled.ul`
         align-items: start;
         gap: 8px;
 
+        h4,
+        span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
         h4 {
             font-size: 16px;
             max-width: 100%;
@@ -145,6 +152,10 @@ export const List = styled.ul`
             color: ${Colors.gray};
             font-style: italic;
             max-width: 100%;
+        }
+
+        img {
+            width: 14px;
         }
 
         @media (min-width: ${breakpoints.desktop}) {
